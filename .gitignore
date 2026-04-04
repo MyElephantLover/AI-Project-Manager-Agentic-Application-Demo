@@ -1,0 +1,59 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables (IMPORTANT)
+.env
+.env.*
+*.env
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Build / output folders
+dist/
+build/
+out/
+target/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+
+# IDE / Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage / test output
+coverage/
+*.coverage
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python packaging
+*.egg-info/
+dist/
+build/
