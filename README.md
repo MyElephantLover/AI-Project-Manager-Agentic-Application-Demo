@@ -33,7 +33,7 @@ Moves the task to **Processing**
 
 ![RAG Agent Architecture](image.png)
 
-**Components**
+## Components
 
 #### ClickUp API Client
 - Fetch tasks
