@@ -57,3 +57,9 @@ env/
 *.egg-info/
 dist/
 build/
+
+.env
+data/
+*.db
+__pycache__/
+.venv/
