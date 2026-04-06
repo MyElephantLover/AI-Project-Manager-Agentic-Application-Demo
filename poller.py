@@ -98,34 +98,52 @@ def update_task_status(task_id: str, status: str) -> None:
     response.raise_for_status()
 
 
+# def process_task(task):
+#     task_id = task["id"]
+#     task_name = task.get("name", "")
+#     description = task.get("description", "")
+
+#     print(f"Processing task: {task_name} ({task_id})")
+
+#     try:
+#         ai_summary = generate_intake_summary(task_name, description)
+#     except Exception as exc:
+#         ai_summary = f"""AI Intake Summary
+
+# Task: {task_name}
+
+# The AI analysis failed this run.
+# Error: {exc}
+
+# Recommended next step:
+# - Review manually
+# - Retry processing
+# """
+
+#     add_comment_to_task(task_id, ai_summary)
+#     update_task_status(task_id, "under review")
+#     mark_as_processed(task_id)
+
+#     print(f"Finished task: {task_name} ({task_id})")
+
 def process_task(task):
     task_id = task["id"]
     task_name = task.get("name", "")
     description = task.get("description", "")
 
-    print(f"Processing task: {task_name} ({task_id})")
+    print(f"Processing task: {task_name}")
 
-    try:
-        ai_summary = generate_intake_summary(task_name, description)
-    except Exception as exc:
-        ai_summary = f"""AI Intake Summary
+    # Call AI
+    ai_summary = generate_intake_summary(task_name, description)
 
-Task: {task_name}
-
-The AI analysis failed this run.
-Error: {exc}
-
-Recommended next step:
-- Review manually
-- Retry processing
-"""
-
+    # Add AI comment to ClickUp
     add_comment_to_task(task_id, ai_summary)
-    update_task_status(task_id, "under review")
+
+    # Move task forward
+    update_task_status(task_id, "under review")  # use your real status
+
+    # Save as processed
     mark_as_processed(task_id)
-
-    print(f"Finished task: {task_name} ({task_id})")
-
 
 def poll_once() -> None:
     print("Polling ClickUp for tasks...")
