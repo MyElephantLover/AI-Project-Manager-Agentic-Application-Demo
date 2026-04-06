@@ -1,7 +1,7 @@
 import asyncio
 from fastapi import FastAPI
 
-from poller import init_db, poll_once, POLL_INTERVAL_SECONDS
+from app.poller import init_db, poll_once, POLL_INTERVAL_SECONDS
 
 app = FastAPI()
 

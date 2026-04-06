@@ -3,7 +3,8 @@ import time
 import sqlite3
 from typing import Any
 import json
-from ai_service import generate_intake_summary
+from app.ai_service import generate_intake_summary
+from app.clickup_client import update_task_status
 
 import requests
 from dotenv import load_dotenv
@@ -91,40 +92,11 @@ def add_comment_to_task(task_id: str, comment_text: str) -> None:
     response = requests.post(url, headers=HEADERS, json=payload, timeout=30)
     response.raise_for_status()
 
-def update_task_status(task_id: str, status: str) -> None:
-    url = f"{BASE_URL}/task/{task_id}"
-    payload = {"status": status}
-    response = requests.put(url, headers=HEADERS, json=payload, timeout=30)
-    response.raise_for_status()
-
-
-# def process_task(task):
-#     task_id = task["id"]
-#     task_name = task.get("name", "")
-#     description = task.get("description", "")
-
-#     print(f"Processing task: {task_name} ({task_id})")
-
-#     try:
-#         ai_summary = generate_intake_summary(task_name, description)
-#     except Exception as exc:
-#         ai_summary = f"""AI Intake Summary
-
-# Task: {task_name}
-
-# The AI analysis failed this run.
-# Error: {exc}
-
-# Recommended next step:
-# - Review manually
-# - Retry processing
-# """
-
-#     add_comment_to_task(task_id, ai_summary)
-#     update_task_status(task_id, "under review")
-#     mark_as_processed(task_id)
-
-#     print(f"Finished task: {task_name} ({task_id})")
+# def update_task_status(task_id: str, status: str) -> None:
+#     url = f"{BASE_URL}/task/{task_id}"
+#     payload = {"status": status}
+#     response = requests.put(url, headers=HEADERS, json=payload, timeout=30)
+#     response.raise_for_status()
 
 def process_task(task):
     task_id = task["id"]
@@ -140,7 +112,7 @@ def process_task(task):
     add_comment_to_task(task_id, ai_summary)
 
     # Move task forward
-    update_task_status(task_id, "under review")  # use your real status
+    update_task_status(task_id, "Processing")  # use your real status
 
     # Save as processed
     mark_as_processed(task_id)
