@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is an AI-powered intake triage system that integrates with ClickUp to automatically process incoming tasks and add contect-aware comments.
+This project is an AI-powered intake triage system that integrates with ClickUp to automatically process incoming tasks and add context-aware comments.
 
 It uses a Retrieval-Augmented Generation (RAG) pipeline to analyze tasks against internal documentation and generate structured recommendations such as:
 
