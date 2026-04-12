@@ -5,6 +5,7 @@ from typing import Any
 import json
 from app.ai_service import generate_intake_summary
 from app.clickup_client import update_task_status
+from app.super_agent import process_task_with_super_agent
 
 import requests
 from dotenv import load_dotenv
@@ -98,24 +99,30 @@ def add_comment_to_task(task_id: str, comment_text: str) -> None:
 #     response = requests.put(url, headers=HEADERS, json=payload, timeout=30)
 #     response.raise_for_status()
 
+# def process_task(task):
+#     task_id = task["id"]
+#     task_name = task.get("name", "")
+#     description = task.get("description", "")
+
+#     print(f"Processing task: {task_name}")
+
+#     # Call AI
+#     ai_summary = generate_intake_summary(task_name, description)
+
+#     # Add AI comment to ClickUp
+#     add_comment_to_task(task_id, ai_summary)
+
+#     # Move task forward
+#     update_task_status(task_id, "Processing")  # use your real status
+
+#     # Save as processed
+#     mark_as_processed(task_id)
+
 def process_task(task):
-    task_id = task["id"]
-    task_name = task.get("name", "")
-    description = task.get("description", "")
+    result = process_task_with_super_agent(task)
 
-    print(f"Processing task: {task_name}")
-
-    # Call AI
-    ai_summary = generate_intake_summary(task_name, description)
-
-    # Add AI comment to ClickUp
-    add_comment_to_task(task_id, ai_summary)
-
-    # Move task forward
-    update_task_status(task_id, "Processing")  # use your real status
-
-    # Save as processed
-    mark_as_processed(task_id)
+    if result.get("status") == "success":
+        mark_as_processed(task["id"])
 
 def poll_once() -> None:
     print("Polling ClickUp for tasks...")
@@ -161,3 +168,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+
+
+

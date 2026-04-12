@@ -1,9 +1,11 @@
 import asyncio
 from fastapi import FastAPI
+from webhook_handler import router as webhook_router
 
 from app.poller import init_db, poll_once, POLL_INTERVAL_SECONDS
 
 app = FastAPI()
+app.include_router(webhook_router)
 
 
 async def polling_loop() -> None:
@@ -30,3 +32,5 @@ def root() -> dict[str, str]:
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "healthy"}
+
+
