@@ -78,10 +78,18 @@ def get_tasks_from_list(list_id: str) -> list[dict[str, Any]]:
     return data.get("tasks", [])
 
 
+# def is_new_intake(task: dict[str, Any]) -> bool:
+#     status_obj = task.get("status", {})
+#     status_name = status_obj.get("status", "")
+#     return status_name.strip().lower() == "new intake"
+
 def is_new_intake(task: dict[str, Any]) -> bool:
     status_obj = task.get("status", {})
     status_name = status_obj.get("status", "")
-    return status_name.strip().lower() == "new intake"
+    return status_name.strip().lower() == "new submission"
+
+def should_check_task(task: dict[str, Any]) -> bool:
+    return is_new_intake(task)
 
 
 def add_comment_to_task(task_id: str, comment_text: str) -> None:
