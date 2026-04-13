@@ -1,4 +1,4 @@
-from clickup_client import extract_custom_fields
+from app.clickup_client import extract_custom_fields
 
 TASK_TO_AGENT = {
     "onboarding": "onboarding_agent",
