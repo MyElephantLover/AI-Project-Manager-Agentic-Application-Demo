@@ -1,4 +1,4 @@
-from clickup_client import (
+from app.clickup_client import (
     extract_custom_fields,
     update_task_status,
     add_task_comment,
