@@ -140,6 +140,9 @@ def poll_once() -> None:
         task_id = task["id"]
         task_name = task.get("name", "(no name)")
 
+        if should_check_task(task):
+            process_task_with_super_agent(task)
+
         if not is_new_intake(task):
             continue
 
