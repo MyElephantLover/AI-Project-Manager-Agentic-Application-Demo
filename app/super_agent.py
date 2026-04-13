@@ -10,8 +10,8 @@ from app.clickup_client import (
     update_review_status,
 )
 
-from agent_router import route_task
-from certified_agents import onboarding_agent, support_agent, documentation_agent
+from app.agent_router import route_task
+from app.certified_agents import onboarding_agent, support_agent, documentation_agent
 
 
 def run_certified_agent(agent_name: str, task: dict) -> dict:
