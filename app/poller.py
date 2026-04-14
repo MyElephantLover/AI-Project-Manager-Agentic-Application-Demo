@@ -91,15 +91,32 @@ def is_new_intake(task: dict[str, Any]) -> bool:
 def should_check_task(task: dict[str, Any]) -> bool:
     return is_new_intake(task)
 
+# def add_comment_to_task(task_id: str, comment_text: str) -> None:
+#     url = f"{BASE_URL}/task/{task_id}/comment"
+#     payload = {
+#         "comment_text": comment_text,
+#         "notify_all": False,
+#     }
+#     response = requests.post(url, headers=HEADERS, json=payload, timeout=30)
+#     response.raise_for_status()
 
-def add_comment_to_task(task_id: str, comment_text: str) -> None:
+def add_task_comment(task_id: str, comment_text: str):
     url = f"{BASE_URL}/task/{task_id}/comment"
     payload = {
-        "comment_text": comment_text,
+        "comment_text": str(comment_text).strip(),
         "notify_all": False,
     }
+
+    print("DEBUG task_id:", task_id)
+    print("DEBUG comment payload:", payload)
+
     response = requests.post(url, headers=HEADERS, json=payload, timeout=30)
+
+    print("DEBUG response status:", response.status_code)
+    print("DEBUG response body:", response.text)
+
     response.raise_for_status()
+    return response.json()
 
 # def update_task_status(task_id: str, status: str) -> None:
 #     url = f"{BASE_URL}/task/{task_id}"
