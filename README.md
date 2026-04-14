@@ -33,6 +33,8 @@ Moves the task to **Processing**
 
 ![RAG Agent Architecture](image.png)
 
+source: Web
+
 ## Components
 
 #### ClickUp API Client
@@ -57,6 +59,11 @@ Moves the task to **Processing**
 #### Persistence
 - SQLite database tracks processed tasks
 
+#### Human-In-The-Loop (HITL) Governance
+
+![Architecture](image-1.png)
+
+[source](https://excalidraw.com/#json=rFwmBj61SnYK7y_vkrR3e,VYGc1eMaQJGJJxzsb5hJEg)
 
 ## Knowledge Base (RAG)
 
