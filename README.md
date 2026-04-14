@@ -33,7 +33,7 @@ Moves the task to **Processing**
 
 ![RAG Agent Architecture](image.png)
 
-source: Web
+*Source: Web*
 
 ## Components
 
@@ -63,7 +63,7 @@ source: Web
 
 ![Architecture](image-1.png)
 
-[source](https://excalidraw.com/#json=rFwmBj61SnYK7y_vkrR3e,VYGc1eMaQJGJJxzsb5hJEg)
+*Arthor: Jenli Chen*
 
 ## Knowledge Base (RAG)
 
