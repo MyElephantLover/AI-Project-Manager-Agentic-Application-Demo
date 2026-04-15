@@ -53,11 +53,15 @@ def load_vector_store():
         embedding_function=embeddings,
     )
 
-
-def query_kb(query: str, k: int = 3):
+def query_kb(query: str, k: int = 3) -> str:
     db = load_vector_store()
     results = db.similarity_search(query, k=k)
-    return results
+
+    if not results:
+        return "No relevant knowledge found."
+
+    context = "\n\n".join([doc.page_content for doc in results])
+    return context
 
 
 client = OpenAI()
